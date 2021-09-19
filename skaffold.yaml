@@ -20,8 +20,9 @@ build:
 deploy:
   kubectl:
     manifests:
-    - ../server/deployment.yaml
     - ../web/deployment.yaml
+    - ../server/deployment.yaml
+    - ../server/database/mysql-deployment.yaml
 portForward:
 - resourceType: service
   resourceName: server
@@ -29,3 +30,6 @@ portForward:
 - resourceType: service
   resourceName: web
   port: 3000
+- resourceType: service
+  resourceName: mysql
+  port: 3306

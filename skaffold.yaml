@@ -1,0 +1,31 @@
+apiVersion: skaffold/v2beta23
+kind: Config
+metadata:
+  name: wealth-assist
+build:
+  artifacts:
+  - image: server
+    context: ../server
+    buildpacks:
+      trustBuilder: true
+      builder: "gcr.io/buildpacks/builder:v1"
+  - image: web
+    context: ../web
+    sync:
+      manual:
+      - src: 'src/components/*'
+        dest: .
+      - src: 'src/styles/*'
+        dest: .
+deploy:
+  kubectl:
+    manifests:
+    - ../server/deployment.yaml
+    - ../web/deployment.yaml
+portForward:
+- resourceType: service
+  resourceName: server
+  port: 8080
+- resourceType: service
+  resourceName: web
+  port: 3000

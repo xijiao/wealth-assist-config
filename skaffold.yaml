@@ -4,32 +4,31 @@ metadata:
   name: wealth-assist
 build:
   artifacts:
-  - image: server
-    context: ../server
-    buildpacks:
-      trustBuilder: true
-      builder: "gcr.io/buildpacks/builder:v1"
-  - image: web
-    context: ../web
-    sync:
-      manual:
-      - src: 'src/components/*'
-        dest: .
-      - src: 'src/styles/*'
-        dest: .
+    - image: server
+      context: ../server
+      buildpacks:
+        trustBuilder: true
+        builder: "gcr.io/buildpacks/builder:v1"
+    - image: web
+      context: ../web
+      sync:
+        manual:
+          - src: "src/components/*"
+            dest: .
+          - src: "src/styles/*"
+            dest: .
+          - src: "src/utilies/*"
+            dest: .
 deploy:
   kubectl:
     manifests:
-    - ../web/deployment.yaml
-    - ../server/deployment.yaml
-    - ../server/database/mysql-deployment.yaml
+      - web-deployment.yaml
+      - server-deployment.yaml
+      - mysql-deployment.yaml
 portForward:
-- resourceType: service
-  resourceName: server
-  port: 8080
-- resourceType: service
-  resourceName: web
-  port: 3000
-- resourceType: service
-  resourceName: mysql
-  port: 3306
+  - resourceType: service
+    resourceName: server
+    port: 8080
+  - resourceType: service
+    resourceName: web
+    port: 3000

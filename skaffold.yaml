@@ -17,7 +17,7 @@ build:
             dest: .
           - src: "src/styles/*"
             dest: .
-          - src: "src/utilies/*"
+          - src: "src/screens/*"
             dest: .
 deploy:
   kubectl:
@@ -31,4 +31,7 @@ portForward:
     port: 8080
   - resourceType: service
     resourceName: web
-    port: 3000
+    port: 19006
+  - resourceType: service
+    resourceName: web
+    port: 19002

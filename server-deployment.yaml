@@ -6,8 +6,8 @@ metadata:
     app: server
 spec:
   ports:
-  - port: 8080
-    protocol: TCP
+    - port: 8080
+      protocol: TCP
   clusterIP: None
   selector:
     app: server
@@ -29,17 +29,17 @@ spec:
         app: server
     spec:
       containers:
-      - name: server
-        image: server
-        env:
-          # Use secret in real usage
-        - name: MYSQL_HOST
-          value: mysql
-        - name: MYSQL_USER
-          value: wealthuser
-        - name: MYSQL_PASSWORD
-          value: wealthpass
-        - name: MYSQL_DATABASE
-          value: wealth
-        - name: REACT_APP_FRONTEND_BASE_URL
-          value: http://localhost:3000
+        - name: server
+          image: server
+          env:
+            # Use secret in real usage
+            - name: MYSQL_HOST
+              value: mysql
+            - name: MYSQL_USER
+              value: wealthuser
+            - name: MYSQL_PASSWORD
+              value: wealthpass
+            - name: MYSQL_DATABASE
+              value: wealth
+            - name: REACT_APP_FRONTEND_BASE_URL
+              value: http://localhost:19006

@@ -6,8 +6,12 @@ metadata:
     app: web
 spec:
   ports:
-  - port: 3000
-    protocol: TCP
+    - port: 19002
+      protocol: TCP
+      name: console
+    - port: 19006
+      protocol: TCP
+      name: web
   clusterIP: None
   selector:
     app: web
@@ -29,9 +33,8 @@ spec:
         app: web
     spec:
       containers:
-      - name: web
-        image: web
-        env:
-        - name: REACT_APP_BACKEND_BASE_URL
-          value: http://localhost:8080
-
+        - name: web
+          image: web
+          env:
+            - name: REACT_APP_BACKEND_BASE_URL
+              value: http://localhost:8080

@@ -13,11 +13,17 @@ build:
       context: ../web
       sync:
         manual:
-          - src: "src/components/*"
+          - src: "components/*"
             dest: .
-          - src: "src/styles/*"
+          - src: "styles/*"
             dest: .
-          - src: "src/screens/*"
+          - src: "screens/*"
+            dest: .
+          - src: "assets/*"
+            dest: .
+          - src: "navigation/*"
+            dest: .
+          - src: "utilities/*"
             dest: .
 deploy:
   kubectl:

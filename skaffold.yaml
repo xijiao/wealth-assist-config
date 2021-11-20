@@ -8,36 +8,37 @@ build:
       context: ../server
       buildpacks:
         trustBuilder: true
-        builder: "gcr.io/buildpacks/builder:v1"
-    - image: web
-      context: ../web
-      sync:
-        manual:
-          - src: "components/*"
-            dest: .
-          - src: "styles/*"
-            dest: .
-          - src: "screens/*"
-            dest: .
-          - src: "assets/*"
-            dest: .
-          - src: "navigation/*"
-            dest: .
-          - src: "utilities/*"
-            dest: .
+        builder: "gcr.io/buildpacks/builder"
+    # - image: web
+    #   context: ../web
+    #   sync:
+    #     manual:
+    #       - src: "components/*"
+    #         dest: .
+    #       - src: "styles/*"
+    #         dest: .
+    #       - src: "screens/*"
+    #         dest: .
+    #       - src: "assets/*"
+    #         dest: .
+    #       - src: "navigation/*"
+    #         dest: .
+    #       - src: "utilities/*"
+    #         dest: .
 deploy:
   kubectl:
     manifests:
-      - web-deployment.yaml
+      # - web-deployment.yaml
       - server-deployment.yaml
       - mysql-deployment.yaml
 portForward:
   - resourceType: service
     resourceName: server
     port: 8080
-  - resourceType: service
-    resourceName: web
-    port: 19006
-  - resourceType: service
-    resourceName: web
-    port: 19002
+    address: 0.0.0.0
+  # - resourceType: service
+  #   resourceName: web
+  #   port: 19006
+  # - resourceType: service
+  #   resourceName: web
+  #   port: 19002

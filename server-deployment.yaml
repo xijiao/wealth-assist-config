@@ -30,7 +30,7 @@ spec:
     spec:
       containers:
         - name: server
-          image: server
+          image: skaffold-jib
           env:
             # Use secret in real usage
             - name: MYSQL_HOST

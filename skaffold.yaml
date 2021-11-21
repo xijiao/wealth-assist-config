@@ -4,11 +4,9 @@ metadata:
   name: wealth-assist
 build:
   artifacts:
-    - image: server
+    - image: skaffold-jib
       context: ../server
-      buildpacks:
-        trustBuilder: true
-        builder: "gcr.io/buildpacks/builder"
+      jib: {}
     # - image: web
     #   context: ../web
     #   sync:
